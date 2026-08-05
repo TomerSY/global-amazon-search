@@ -1,0 +1,15 @@
+{
+  "name": "crosscart",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Compare one product across every supported Amazon marketplace.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check app.js && node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

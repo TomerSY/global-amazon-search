@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Compare one product across every supported Amazon marketplace and see the cheapest delivered option."
+    />
+    <meta name="theme-color" content="#2c1754" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CrossCart — Every Amazon. One clear choice." />
+    <meta property="og:description" content="Compare one product across every supported Amazon marketplace without hiding a single store." />
+    <meta property="og:image" content="./og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CrossCart — Every Amazon. One clear choice." />
+    <meta name="twitter:description" content="Compare one product across every supported Amazon marketplace without hiding a single store." />
+    <meta name="twitter:image" content="./og.png" />
+    <title>CrossCart — Every Amazon. One search.</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>↗</text></svg>" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js" defer></script>
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="CrossCart home">
+        <span class="brand-mark" aria-hidden="true"><span>C</span><span>C</span></span>
+        <span>CrossCart</span>
+      </a>
+      <div class="header-meta">
+        <span class="independent-pill">Independent comparison</span>
+        <a href="#how-it-works">How it works</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="eyebrow"><span></span> One search, every storefront</div>
+        <h1 id="hero-title">Every Amazon.<br /><em>One clear choice.</em></h1>
+        <p class="hero-copy">
+          Compare the same item across all 22 supported Amazon stores. We keep every price visible and mark the cheapest delivered option.
+        </p>
+
+        <form class="search-panel" id="search-form">
+          <label class="search-field" for="search-input">
+            <span class="field-label">What are you looking for?</span>
+            <span class="input-row">
+              <span class="search-glyph" aria-hidden="true"></span>
+              <input
+                id="search-input"
+                name="query"
+                type="search"
+                value="Sony WH-1000XM5"
+                placeholder="Product, keywords, ASIN or Amazon URL"
+                autocomplete="off"
+              />
+            </span>
+          </label>
+          <label class="destination-field" for="destination">
+            <span class="field-label">Deliver to</span>
+            <span class="select-row">
+              <span aria-hidden="true">🇮🇱</span>
+              <select id="destination" name="destination">
+                <option value="IL">Israel</option>
+              </select>
+            </span>
+          </label>
+          <button class="search-button" type="submit">
+            <span>Compare prices</span><span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <div class="hero-footnote">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          22 marketplaces supported
+          <span aria-hidden="true">•</span>
+          Prices normalized to ILS
+          <span aria-hidden="true">•</span>
+          No store hidden
+        </div>
+      </section>
+
+      <section class="results-shell" aria-labelledby="results-title">
+        <div class="preview-notice" id="preview-notice">
+          <span class="notice-icon" aria-hidden="true">i</span>
+          <p><strong>Interface preview</strong> — prices are illustrative until the private live-data service is connected.</p>
+        </div>
+
+        <div class="results-heading">
+          <div>
+            <p class="section-kicker">Marketplace comparison</p>
+            <h2 id="results-title">Best matches</h2>
+          </div>
+          <div class="results-summary" id="results-summary" aria-live="polite"></div>
+        </div>
+
+        <div class="toolbar" aria-label="Result controls">
+          <label class="toggle-control">
+            <input id="shippable-only" type="checkbox" />
+            <span class="toggle-track" aria-hidden="true"><span></span></span>
+            Show only options that ship to Israel
+          </label>
+          <label class="sort-control" for="compare-basis">
+            Mark cheapest by
+            <select id="compare-basis">
+              <option value="delivered">Delivered estimate</option>
+              <option value="item">Item price</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="results" class="results-list" aria-live="polite"></div>
+      </section>
+
+      <section class="method" id="how-it-works" aria-labelledby="method-title">
+        <div>
+          <p class="section-kicker light">A fair comparison</p>
+          <h2 id="method-title">You see the whole market.<br />You make the call.</h2>
+        </div>
+        <div class="method-grid">
+          <article>
+            <span>01</span>
+            <h3>Match the item</h3>
+            <p>Equivalent listings are grouped by identifiers and product details, not hidden as duplicates.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Normalize the cost</h3>
+            <p>Local prices and known shipping are converted to ILS so the comparison is genuinely useful.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Keep uncertainty visible</h3>
+            <p>Shipping confidence is labelled clearly. Amazon checkout remains the final confirmation.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand footer-brand" href="./">
+        <span class="brand-mark" aria-hidden="true"><span>C</span><span>C</span></span>
+        <span>CrossCart</span>
+      </a>
+      <p>Independent comparison tool. Not affiliated with or endorsed by Amazon.</p>
+      <p>Prices and shipping can change. Always confirm at checkout.</p>
+    </footer>
+  </body>
+</html>
