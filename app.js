@@ -31,16 +31,15 @@ const DEMO_PRODUCTS = [
     title: "Sony WH-1000XM5 Wireless Noise Canceling Headphones",
     meta: "Black · Over-ear · International listings grouped",
     searchTerm: "Sony WH-1000XM5 black",
-    asin: "B09XS7JWHH",
     tags: ["sony", "headphones", "wireless", "noise canceling", "noise cancelling", "xm5"],
     offers: [
       { market: "CA", local: "C$449.00", itemIls: 1178, shippingIls: 139, status: "likely" },
-      { market: "DE", local: "€309.00", itemIls: 1248, shippingIls: 59, status: "confirmed", asin: "B09Y2MYL5C" },
-      { market: "ES", local: "€312.00", itemIls: 1261, shippingIls: 98, status: "confirmed", asin: "B09Y2MYL5C" },
-      { market: "FR", local: "€319.00", itemIls: 1289, shippingIls: 72, status: "likely", asin: "B09Y2MYL5C" },
-      { market: "IT", local: "€324.99", itemIls: 1313, shippingIls: 85, status: "likely", asin: "B09Y2MYL5C" },
+      { market: "DE", local: "€309.00", itemIls: 1248, shippingIls: 59, status: "confirmed" },
+      { market: "ES", local: "€312.00", itemIls: 1261, shippingIls: 98, status: "confirmed" },
+      { market: "FR", local: "€319.00", itemIls: 1289, shippingIls: 72, status: "likely" },
+      { market: "IT", local: "€324.99", itemIls: 1313, shippingIls: 85, status: "likely" },
       { market: "JP", local: "¥48,500", itemIls: 1180, shippingIls: 169, status: "likely" },
-      { market: "UK", local: "£279.00", itemIls: 1332, shippingIls: 129, status: "likely", asin: "B09Y2LL45F" },
+      { market: "UK", local: "£279.00", itemIls: 1332, shippingIls: 129, status: "likely" },
       { market: "US", local: "$349.99", itemIls: 1274, shippingIls: 89, status: "confirmed" },
       { market: "AE", local: "AED 1,299", itemIls: 1290, shippingIls: null, status: "no" },
       { market: "AU", local: "A$499.00", itemIls: 1197, shippingIls: null, status: "no" },
@@ -53,7 +52,6 @@ const DEMO_PRODUCTS = [
     title: "Kindle Paperwhite 16 GB — glare-free display",
     meta: "Black · Wi-Fi · Equivalent current-generation listings",
     searchTerm: "Kindle Paperwhite 16GB black",
-    asin: "B0CFPXBJ9Y",
     tags: ["kindle", "paperwhite", "ereader", "e-reader", "reader", "amazon"],
     offers: [
       { market: "DE", local: "€159.99", itemIls: 646, shippingIls: 54, status: "confirmed" },
@@ -73,7 +71,6 @@ const DEMO_PRODUCTS = [
     title: "Apple AirPods Pro with USB-C Charging Case",
     meta: "White · Active noise cancellation · USB-C",
     searchTerm: "Apple AirPods Pro USB-C",
-    asin: "B0CHWRXH8B",
     tags: ["apple", "airpods", "earbuds", "wireless", "usb-c", "noise cancelling"],
     offers: [
       { market: "US", local: "$189.99", itemIls: 691, shippingIls: 92, status: "likely" },
@@ -111,10 +108,6 @@ export function buildAmazonSearchUrl(domain, query) {
   return `https://www.${domain}/s?k=${encodeURIComponent(query)}`;
 }
 
-export function buildAmazonProductUrl(domain, asin) {
-  return `https://www.${domain}/dp/${encodeURIComponent(asin)}`;
-}
-
 export function totalForOffer(offer, basis = "delivered") {
   if (!offer.available || !Number.isFinite(offer.itemIls)) return Number.POSITIVE_INFINITY;
   if (basis === "item") return offer.itemIls;
@@ -140,12 +133,7 @@ export function expandMarketplaceOffers(product) {
       ...market,
       ...offer,
       available: offer.available !== false,
-      directListing: Boolean(offer.url || offer.asin || product.asin),
-      url:
-        offer.url ||
-        (offer.asin || product.asin
-          ? buildAmazonProductUrl(market.domain, offer.asin || product.asin)
-          : buildAmazonSearchUrl(market.domain, product.searchTerm || product.title)),
+      url: offer.url || buildAmazonSearchUrl(market.domain, product.searchTerm || product.title),
     };
   });
 }
@@ -226,8 +214,8 @@ function renderOffer(offer, cheapestValue, basis) {
   const total = Number.isFinite(delivered)
     ? `<strong>${formatIls(delivered)}</strong><span>item + known shipping</span>${isCheapest ? '<span class="cheapest-badge">Cheapest</span>' : ""}`
     : `<span class="empty-price">Not available</span>${isCheapest ? '<span class="cheapest-badge">Lowest item price</span>' : ""}`;
-  const actionText = offer.available && offer.directListing ? "View listing" : "Search store";
-  const actionClass = offer.available && offer.directListing ? "" : " secondary";
+  const actionText = offer.available ? "View listing" : "Search store";
+  const actionClass = offer.available ? "" : " secondary";
 
   return `
     <li class="offer-row${isCheapest ? " cheapest" : ""}${offer.available ? "" : " unavailable"}">
